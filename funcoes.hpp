@@ -20,15 +20,23 @@ int lerPrimeiraLinha(ifstream &arquivo){
     return N;
 }
 
-int contarLinhasVazias(ifstream& arquivo){
+int contarLinhasVazias(ifstream& arquivo, int N){
     string linha;
-    int cont = 0;
+    bool estado;
+    int cont = 0, contTamanho = 0;
     while(!arquivo.eof()){
         getline(arquivo, linha);
-        if(linha.empty()){
+        estado = true;
+        for(char c : linha){
+            if(!isspace(c)){
+                estado = false;
+            }
+        }
+        if(estado){
             cont++;
         }
     }
+    cout << "CONT = " << cont << endl;
     return cont;
 }
 
@@ -94,9 +102,9 @@ void converterStrParaInt(string ** matrizTexto, int ** matrizInt, int N){
         for (int j = 0; j < N; j++)
         {
             matrizInt[i][j] = atoi(matrizTexto[i][j].c_str());
-            cout << matrizInt[i][j] << " ";
+            //cout << matrizInt[i][j] << " ";
         }
-        cout << "\n";
+        //cout << "\n";
     }
 }
 
@@ -318,7 +326,7 @@ int andar(int ** matriz, int N, int linhaAtual, int colunaAtual){
             imprimirMatrizInt(matriz, N);
             break;
         }
-        cout << "\n" << endl;
+        //cout << "\n" << endl;
         switch(proximoLugar){
             case 1:
                 soma += matriz[linhaAtual][colunaAtual];
@@ -352,8 +360,8 @@ int andar(int ** matriz, int N, int linhaAtual, int colunaAtual){
                 linhaAtual++;//Andei para a diagonal esquerda
             break;
         }
-        imprimirMatrizInt(matriz, N);
-        cout << "\n";
+        //imprimirMatrizInt(matriz, N);
+        //cout << "\n";
     }
     cout << "Soma = " << soma << endl;
     cout << "Fim da caminhada!\n";

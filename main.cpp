@@ -13,11 +13,12 @@ int main(){
     colunaInicio = determinarColunaInicio(arquivoPosicaoInicial);
     
     N = lerPrimeiraLinha(arquivo);
-    nMatrizesArquivo = contarLinhasVazias(arquivo);
+    cout << N << "\n";
+    nMatrizesArquivo = contarLinhasVazias(arquivo, N);
 
     arquivo.close();//Fechei aqui pois na função de contar linhas vazias, percorro todo o arquivo.
 
-    arquivo.open("input.data", ios::in);
+    arquivo.open("dataset/input.data", ios::in);
 
     matrizInt = (int**)malloc(N * sizeof(int*));
     for(int i = 0; i < N; i++){
@@ -33,6 +34,8 @@ int main(){
         cout << "Matriz " << i + 1 << endl;       
         lerMatrizArquivo(matrizTxt, arquivo, N);        
         converterStrParaInt(matrizTxt, matrizInt, N);
+        imprimirMatrizInt(matrizInt, N);
+        cout << endl;
         somaFinal += andar(matrizInt, N, linhaInicio, colunaInicio);
         
         cout << "\n";
