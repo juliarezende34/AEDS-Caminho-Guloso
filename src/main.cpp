@@ -14,7 +14,7 @@ int main(){
     
     N = lerPrimeiraLinha(arquivo);
     cout << N << "\n";
-    nMatrizesArquivo = contarLinhasVazias(arquivo, N);
+    nMatrizesArquivo = contarLinhasVazias(arquivo);
 
     arquivo.close();//Fechei aqui pois na função de contar linhas vazias, percorro todo o arquivo.
 

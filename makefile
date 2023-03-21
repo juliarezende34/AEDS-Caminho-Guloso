@@ -1,58 +1,40 @@
-# Nome do projeto
-PROJ_NAME=ativ1
-#wildcard vai pegar todos os arquivos cpp
-CPP_SOURCE=$(wildcard ./*.cpp)
+CXX      := -g++
+CXXFLAGS := -Wall -Wextra -Werror
+LDFLAGS  := -lstdc++ -lm
+BUILD    := ./build
+OBJ_DIR  := $(BUILD)/objects
+APP_DIR  := $(BUILD)/
+TARGET   := app
+INCLUDE  := -Iinclude/
+SRC      :=  $(wildcard src/*.cpp)
 
-#wildcard vai pegar todos os arquivos hpp
-HPP_SOURCE=$(wildcard ./*.hpp)
+OBJECTS := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
-#Arquivos compilados
-OBJ=$(subst .cpp,.o,$(subst source,objects,$(CPP_SOURCE)))
+all: build $(APP_DIR)/$(TARGET)
 
-# Compiler and linker
-CC=g++
+$(OBJ_DIR)/%.o: %.cpp
+	@mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) $(INCLUDE) -o $@ -c $<
 
-# Flags para o compilador
-# C: Compila mas não chama o linker
-# Wall: mostra todos os warnings
-# Wextra:  Warnings que o wall não mostra
-# ansi: Só roda c++ padrão.  
-# pedantic: Rejeita c++ não padrão
-CC_FLAGS=-c         \
-	 	 -Wextra    \
-         -Wall      \
-         -ansi      \
-         -pedantic  \
+$(APP_DIR)/$(TARGET): $(OBJECTS)
+	@mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) $(INCLUDE) $(LDFLAGS) -o $(APP_DIR)/$(TARGET) $(OBJECTS)
 
-# Command used at clean target
-RM = rm -rf
+.PHONY: all build clean debug release run
 
+build:
+	@mkdir -p $(APP_DIR)
+	@mkdir -p $(OBJ_DIR)
 
-# Compilation and linking
+debug: CXXFLAGS += -DDEBUG -g
+debug: all
 
-all: $(PROJ_NAME)
-
-$(PROJ_NAME): $(OBJ)
-	@ echo 'Building binary using G++ linker: $@'
-	$(CC) $^ -g -o $@
-	@ echo 'Finished building binary: $@'
-	@ echo ' '
-
-./objects/%.o: ./*.cpp ./*.hpp
-	@ echo 'Building target using G++ compiler: $<'
-	$(CC) $< $(CC_FLAGS) -o $@
-	@ echo ' '
-
-./objects/main.o: ./main.cpp (HPP_SOURCE)
-@ echo 'Building target using G++ compiler: $<'
-	$(CC) $< $(CC_FLAGS) -o $@
-	@ echo ' '
+release: CXXFLAGS += -O3
+release: all
 
 clean:
-	@ $(RM) ./*.o $(PROJ_NAME) *~
-	
-run:    all
-	./ativ1
+	-@rm -rvf $(OBJ_DIR)/*
+	-@rm -rvf $(APP_DIR)/*
 
-
-.TUDO: all clean
+run:
+	./$(BUILD)/$(TARGET)

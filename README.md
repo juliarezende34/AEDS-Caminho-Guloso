@@ -71,9 +71,18 @@ Para escolher onde deve-se andar, é necessário analisar os números ao redor d
 <img src = "readmePics/todasPossibilidades.png" width = "20%"/></br></br>
 * Ordem de inserção no vector: direita, diagonal direita, para baixo, esquerda e diagonal esquerda.
 
+## Resultados 
+<img src = "readmePics/resultado.png" width = "17%"/></br></br>
+O código funciona da mesma maneira para uma quantidade "n" de matrizes contidas no arquivo ```input.data```, ou seja, toma as mesmas decisões de caminhamento para qualquer matriz que for lida. No final, ainda, é informado ao usuário a soma total do caminhamento das "n" matrizes.
+ 
 ## Considerações finais
 * As funções ```lerMatrizArquivo```, ```converterStrParaInt``` e ```andar``` são chamadas dentro de um ```for``` que roda de acordo com o número de matrizes existentes no ```input.data```, pois elas tratam uma matriz por vez;
 * Após as manipulações, a memórias das matrizes são liberadas e os arquivos são fechados.
+* Especificações da máquina em que o código foi rodado:
+  * Processador Intel Core i5, 7th Gen;
+  * Sistema Operacional Windows 10;
+  * Terminal do WSL: Ubuntu 20.04.5;
+  * 8GB de RAM.
 * | Comando                |  Função                                                                                           |                     
   | -----------------------| ------------------------------------------------------------------------------------------------- |
   |  `make clean`          | Apaga a última compilação realizada contida na pasta build                                        |

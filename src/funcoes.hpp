@@ -20,10 +20,10 @@ int lerPrimeiraLinha(ifstream &arquivo){
     return N;
 }
 
-int contarLinhasVazias(ifstream& arquivo, int N){
+int contarLinhasVazias(ifstream& arquivo){
     string linha;
     bool estado;
-    int cont = 0, contTamanho = 0;
+    int cont = 0;
     while(!arquivo.eof()){
         getline(arquivo, linha);
         estado = true;
@@ -64,7 +64,7 @@ void lerMatrizArquivo(string ** matrizTexto, ifstream &arquivo, int N){
         {
             getline(arquivo, linha);
 
-            for (int i = 0; i <= linha.size(); i++)
+            for (int i = 0; i <= (int) linha.size(); i++)
             {
                 if (linha[i] != '\0')
                 {
@@ -129,7 +129,7 @@ void imprimirMatrizTxt(string ** matriz, int N){
 int posicaoMaiorValor(vector<int> vetor){
     int maior = 0, posicaoMaior = vetor[0];
     if(!vetor.empty()){
-        for (int i = 0; i < vetor.size(); i++){
+        for (int i = 0; i < (int)vetor.size(); i++){
             if (vetor[i] > maior){
                 maior = vetor[i];
                 posicaoMaior = i;
@@ -316,7 +316,7 @@ int andar(int ** matriz, int N, int linhaAtual, int colunaAtual){
     // 1 - Direita, 2 - Esquerda, 3 - Para baixo, 4 - Diagonal direita, 5 - Diagonal esquerda
     int proximoLugar = -1, soma = 0;
     while(true){
-        if(linhaAtual == colunaAtual == (N-1)){
+        if((linhaAtual == colunaAtual) == (N-1)){
             break;
         }
         proximoLugar = ondeAndar(matriz, linhaAtual, colunaAtual, N);
