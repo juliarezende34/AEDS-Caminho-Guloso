@@ -6,8 +6,8 @@ int main(){
     string ** matrizTxt;
     int ** matrizInt;
 
-    arquivoPosicaoInicial.open("posicaoInicial.data", ios::in);
-    arquivo.open("input.data", ios::in);
+    arquivoPosicaoInicial.open("dataset/posicaoInicial.data", ios::in);
+    arquivo.open("dataset/input.data", ios::in);
 
     linhaInicio = determinarLinhaInicio(arquivoPosicaoInicial);
     colunaInicio = determinarColunaInicio(arquivoPosicaoInicial);
